@@ -30,13 +30,11 @@ No Location REST API.  Object is nested within other objects.
 
 
 
+## User
 
-############## THE PART I AM WORKING ON ###############################
-## GtNowUser
+The `GtNowUser` object represents a user of the App.
 
-The `GtNowUser` object represents a user of the GTNow system.
-
-### GtNowUser Object
+### User Object
 
 |Name               |Type                     |Description                                                             |
 |-------------------|-------------------------|------------------------------------------------------------------------|
@@ -45,7 +43,7 @@ The `GtNowUser` object represents a user of the GTNow system.
 |friends_list       |`Optional<GtNowUsers>`     |Friends list of a user.                                                |
 |play_list	    |`Optional<Songs>  `        |Last time that the user location was reported.                          |
 
-### GtNowUser REST API
+### User REST API
 
 |HTTP Method|URL				|Input		|Output         |Description                                           |
 |-----------|-----------------------------------|---------------|---------------|------------------------------------------------------|
