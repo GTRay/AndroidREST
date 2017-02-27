@@ -33,8 +33,6 @@ The `Song` object represents a song
 |-----------|-----------------------|-----------|---------------|------------------------------------------------------|
 | GET       |/api/song             |           |  |Get all songs|
 | GET       |/api/song/{songId}    |           |Song      |Get the song with the provided song ID.               |
-
-
 | GET       |/api/song/{title}    |           |Songs      |Get a list of songs with the provided title.              |
 | GET       |/api/song/{artist}    |           |Songs      |Get a list of songs with the provided artist.               |
 | GET       |/api/song/{genre}    |           |Songs      |Get a list of songs with the provided genre.               |
@@ -66,7 +64,7 @@ The `Playlist` object represents the metadata about a collection of songs.
 |POST       |/api/playlists/           |`Playlist`      |`Playlist`      |Create a new Playlist.                                       |
 |PUT        |/api/playlists/{playlistId}  |`Playlist`      |`Playlist`      |Add song to an existing Playlist.                                 
 |DELETE     |/api/playlists/{playlistId}/members/{songId}|       |`Playlist`|Remove song from playlist.      |
-|GET        |/api/playlist/{playlistId}            |           |`Playlist’    |Get link to access playlist    |
+|GET        |/api/playlist/{playlistId}            |           |`Playlist`    |Get link to access playlist    |
 |GET        |/api/playlists/{playlistLink}  |           |`Playlist`      |Get the Playlist represented by the provided playlistLink. |
 
 
@@ -142,5 +140,5 @@ The `PlaylistInvitation` object represents a request from a group member to anot
 |-----------|-------------------------------------|---------------|---------------------|------------------------------|
 |GET        |/api/playlist-invitations               |               |`List<PlaylistInvitation>`|Invitations for current user. |
 |GET        |/api/playlist-invitations/{invitationId}|               |`PlaylistInvitation`      |Get invitation by provided ID.|
-|POST       |/api/playlist-invitations/{recepientId}            | ‘PlaylistInvitation`|`PlaylistInvitation`      | Send a playlist invitation |
+|POST       |/api/playlist-invitations/{recepientId}            | `PlaylistInvitation`|`PlaylistInvitation`      | Send a playlist invitation |
 |PUT        |/api/playlist-invitations/{playlistId}|`PlaylistInvitation`|`PlaylistInvitation`      |Accept/reject the invitation. |
