@@ -23,7 +23,7 @@ The `Song` object represents a song
 |title          |String                   |title: the title of song                   |
 |artist           |String                   |Artist: the artist of song|
 |genre           |String                   |genre: the genre of song|
-|length           |String?                   |length: the length of song|
+|length           |String                   |length: the length of song|
 |rating           |Integer                   |rating: users’ rating of song|
 
 ### Song REST API
