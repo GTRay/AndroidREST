@@ -15,9 +15,8 @@ User authentication will be handled by Google Account's User service API.
 ## Song
 ### Song Object
 
-
-
 The `Song` object represents a song
+
 |Name               |Type                     |Description                                                             |
 |-------------------|-------------------------|------------------------------------------------------------------------|
 |id          |String                   |id: unique ID for this song    |
