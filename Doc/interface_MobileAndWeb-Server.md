@@ -11,6 +11,35 @@ REST API calls are all to be executed in the context of the currently authentica
 User authentication will be handled by Google Account's User service API.
 
 
+## User
+
+The `User` object represents a user of the App.
+
+### User Object
+
+|Name               |Type                     |Description                                                             |
+|-------------------|-------------------------|------------------------------------------------------------------------|
+|id                 |`String`                   |Unique identifier for a user (Provided by Google User Service API).   |
+|first_name         |`String`                   |Display first name for the user.                                      |
+|family_name	    |`String`			|Display family name for the user.                                     |
+|username           |`String`     		|User name of a user.                                                  |
+|email		    |`String`			|Email address of the user.					       |
+|password	    |`String`        		|The password of the user.                         		       |
+|access_token	    |`String`			|The access token of the user.					       |
+
+### User REST API
+
+|HTTP Method|URL						|Input		|Output         |Description                                           |
+|-----------|---------------------------------------------------|---------------|---------------|------------------------------------------------------|
+| GET       |/api/users/first_name     				|           	|		|Get the first name of the user.	               |
+| GET 	    |/api/users/last_name				|		|		|Get the last name of the user.			       |
+| GET       |/api/users   					|           	|      		|Get the user with the provided user ID.               |
+| POST 	    |/api/users						|User		|		|Create the user account.	     		       |
+| PUT       |/api/users/{userId}    				|User  		|User      	|Updates a user.                                       |
+| GET	    |/api/users/login?email=value&password=value	|`String`	|`Token`   	|Login given username and password.		       |
+| GET	    |/api/users/email					|User		|`String`	|Get the email of the user.			       |
+
+
 
 ## Song
 ### Song Object
@@ -65,36 +94,6 @@ The `Playlist` object represents the metadata about a collection of songs.
 |DELETE     |/api/playlists/{playlistId}/members/{songId}|       |`Playlist`|Remove song from playlist.      |
 |GET        |/api/playlist/{playlistId}            |           |`Playlist`    |Get link to access playlist    |
 |GET        |/api/playlists/{playlistLink}  |           |`Playlist`      |Get the Playlist represented by the provided playlistLink. |
-
-
-
-## User
-
-The `User` object represents a user of the App.
-
-### User Object
-
-|Name               |Type                     |Description                                                             |
-|-------------------|-------------------------|------------------------------------------------------------------------|
-|id                 |`String`                   |Unique identifier for a user (Provided by Google User Service API).   |
-|first_name         |`String`                   |Display first name for the user.                                      |
-|family_name	    |`String`			|Display family name for the user.                                     |
-|username           |`String`     		|User name of a user.                                                  |
-|email		    |`String`			|Email address of the user.					       |
-|password	    |`String`        		|The password of the user.                         		       |
-|access_token	    |`String`			|The access token of the user.					       |
-
-### User REST API
-
-|HTTP Method|URL						|Input		|Output         |Description                                           |
-|-----------|---------------------------------------------------|---------------|---------------|------------------------------------------------------|
-| GET       |/api/users/first_name     				|           	|		|Get the first name of the user.	               |
-| GET 	    |/api/users/last_name				|		|		|Get the last name of the user.			       |
-| GET       |/api/users   					|           	|      		|Get the user with the provided user ID.               |
-| POST 	    |/api/users						|User		|		|Create the user account.	     		       |
-| PUT       |/api/users/{userId}    				|User  		|User      	|Updates a user.                                       |
-| GET	    |/api/users/login?email=value&password=value	|`String`	|`Token`   	|Login given username and password.		       |
-| GET	    |/api/users/email					|User		|`String`	|Get the email of the user.
 
 
 
