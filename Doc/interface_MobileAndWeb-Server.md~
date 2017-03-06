@@ -82,7 +82,7 @@ The `User` object represents a user of the App.
 |username           |`String`     		|User name of a user.                                                  |
 |email		    |`String`			|Email address of the user.					       |
 |password	    |`String`        		|The password of the user.                         		       |
-|access_token	    |`String`			|The access token of the user.					       |`
+|access_token	    |`String`			|The access token of the user.					       |
 
 ### User REST API
 
@@ -90,10 +90,11 @@ The `User` object represents a user of the App.
 |-----------|-----------------------------------|---------------|---------------|------------------------------------------------------|
 | GET       |/api/users/first_name     		|           	|		|Get the first name of the user.	               |
 | GET 	    |/api/users/last_name		|		|		|Get the last name of the user.			       |
-| GET       |/api/users/id    			|           	|      		|Get the user with the provided user ID.               |
+| GET       |/api/users   			|           	|      		|Get the user with the provided user ID.               |
 | POST 	    |/api/users				|User		|		|Create the user account.	     		       |
 | PUT       |/api/users/{userId}    		|User  		|User      	|Updates a user.                                       |
-
+| GET	    |/api/users/access_token		|password	|access_token	|Login given username and password.		       |
+| 
 
 
 

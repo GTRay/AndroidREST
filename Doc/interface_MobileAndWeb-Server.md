@@ -86,15 +86,15 @@ The `User` object represents a user of the App.
 
 ### User REST API
 
-|HTTP Method|URL				|Input		|Output         |Description                                           |
-|-----------|-----------------------------------|---------------|---------------|------------------------------------------------------|
-| GET       |/api/users/first_name     		|           	|		|Get the first name of the user.	               |
-| GET 	    |/api/users/last_name		|		|		|Get the last name of the user.			       |
-| GET       |/api/users   			|           	|      		|Get the user with the provided user ID.               |
-| POST 	    |/api/users				|User		|		|Create the user account.	     		       |
-| PUT       |/api/users/{userId}    		|User  		|User      	|Updates a user.                                       |
-| GET	    |/api/users/access_token		|password	|access_token	|Login given username and password.		       |
-| 
+|HTTP Method|URL						|Input		|Output         |Description                                           |
+|-----------|---------------------------------------------------|---------------|---------------|------------------------------------------------------|
+| GET       |/api/users/first_name     				|           	|		|Get the first name of the user.	               |
+| GET 	    |/api/users/last_name				|		|		|Get the last name of the user.			       |
+| GET       |/api/users   					|           	|      		|Get the user with the provided user ID.               |
+| POST 	    |/api/users						|User		|		|Create the user account.	     		       |
+| PUT       |/api/users/{userId}    				|User  		|User      	|Updates a user.                                       |
+| GET	    |/api/users/login?email=value&password=value	|`String`	|`Token`   	|Login given username and password.		       |
+| GET	    |/api/users/email					|User		|`String`	|Get the email of the user.
 
 
 
