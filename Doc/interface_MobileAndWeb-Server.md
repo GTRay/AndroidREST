@@ -78,6 +78,7 @@ The `Playlist` object represents the metadata about a collection of songs.
 |---------------|-----------|------------------------------------------------------------------------------------------|
 |id             |`String`     |Unique identifier for a Playlist.                                                            |
 |name           |`String`     |Display name for the Playlist.                                                               |
+|hostId         |`String`     |Unique identifier of the user who owns the playlist.                                         |
 |members        |`List<Song>`|List of all songs of the Playlist.                                                 |
 |link		|`String`	| Link to access playlist					|
 
