@@ -17,8 +17,8 @@ The `User` object represents a user of the App.
 
 ### User Object
 
-|Name               |Type                     |Description                                                             |
-|-------------------|-------------------------|------------------------------------------------------------------------|
+|Name               |Type                       |Description                                                             |
+|-------------------|---------------------------|------------------------------------------------------------------------|
 |id                 |`String`                   |Unique identifier for a user (Provided by Google User Service API).   |
 |first_name         |`String`                   |Display first name for the user.                                      |
 |family_name	    |`String`			|Display family name for the user.                                     |
