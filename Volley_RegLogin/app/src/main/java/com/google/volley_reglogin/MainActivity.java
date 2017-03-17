@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String REGISTER_URL = "http://52.167.231.19:8080/api/users";
 
-    public static final String KEY_USERNAME = "name";
+    public static final String KEY_NAME = "name";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_EMAIL = "email";
 
@@ -50,6 +50,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonLogin.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == buttonRegister) {
+            registerUser();
+        }
+        if (v == buttonLogin) {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
     private void registerUser(){
         final String name = editTextUsername.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
@@ -71,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             protected Map<String,String> getParams(){
                 Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_USERNAME,name);
+                params.put(KEY_NAME,name);
                 params.put(KEY_PASSWORD,password);
                 params.put(KEY_EMAIL, email);
                 return params;
@@ -82,13 +92,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         requestQueue.add(stringRequest);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v == buttonRegister) {
-            registerUser();
-        }
-        if (v == buttonLogin) {
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-    }
 }

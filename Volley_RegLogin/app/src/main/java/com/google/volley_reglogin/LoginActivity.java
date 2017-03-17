@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public static final String LOGIN_URL = "http://52.167.231.19:8080/api/users";
 
-    public static final String KEY_USERNAME="name";
+    public static final String KEY_NAME="name";
     public static final String KEY_PASSWORD="password";
 
     private EditText editTextUsername;
@@ -50,6 +50,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         buttonLogin.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View v) {
+        userLogin();
+    }
 
     private void userLogin() {
         name = editTextUsername.getText().toString().trim();
@@ -75,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<String,String>();
-                map.put(KEY_USERNAME,name);
+                map.put(KEY_NAME,name);
                 map.put(KEY_PASSWORD,password);
                 return map;
             }
@@ -87,12 +91,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void openProfile(){
         Intent intent = new Intent(this, ActivityUserProfile.class);
-        intent.putExtra(KEY_USERNAME, name);
+        intent.putExtra(KEY_NAME, name);
         startActivity(intent);
     }
 
-    @Override
-    public void onClick(View v) {
-        userLogin();
-    }
 }

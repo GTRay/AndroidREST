@@ -22,6 +22,6 @@ public class ActivityUserProfile extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        textView.setText("Welcome User " + intent.getStringExtra(LoginActivity.KEY_USERNAME));
+        textView.setText("Welcome User " + intent.getStringExtra(LoginActivity.KEY_NAME));
     }
 }
