@@ -19,7 +19,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     public static final String REGISTER_URL = "http://52.167.231.19:8080/api/users";
 
@@ -46,18 +46,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
 
-        buttonRegister.setOnClickListener(this);
-        buttonLogin.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == buttonRegister) {
-            registerUser();
-        }
-        if (v == buttonLogin) {
-            startActivity(new Intent(this, LoginActivity.class));
-        }
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerUser();
+            }
+        });
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
     }
 
     private void registerUser(){

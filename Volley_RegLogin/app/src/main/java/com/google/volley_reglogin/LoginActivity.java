@@ -23,7 +23,7 @@ import java.util.Map;
  * Created by rayleigh on 3/15/17.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity {
 
     public static final String LOGIN_URL = "http://52.167.231.19:8080/api/users";
 
@@ -47,12 +47,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
 
-        buttonLogin.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        userLogin();
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userLogin();
+            }
+        });
     }
 
     private void userLogin() {
