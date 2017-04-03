@@ -3,12 +3,13 @@ package com.google.volley_reglogin;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,12 +22,13 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String REGISTER_URL = "http://52.167.231.19:8080/api/users";
+    public static final String REGISTER_URL = "http://104.196.62.142:8080/server_1/webapi/users";
 
-    public static final String KEY_NAME = "name";
+    public static final String KEY_NAME = "username";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_EMAIL = "email";
 
+    private static final String TAG = "Main Acitivity";
     private EditText editTextUsername;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // Handle access token.
+                        Log.e(TAG, "Register received: " + response.toString());
                         long token = Long.parseLong(response);
                         if(token == 0) {
                             Toast.makeText(MainActivity.this, R.string.registerfail_toast, Toast.LENGTH_LONG).show();
@@ -92,10 +95,24 @@ public class MainActivity extends AppCompatActivity {
                 params.put(KEY_EMAIL, email);
                 return params;
             }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/raw";
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("Content-Type", "application/raw");
+                return params;
+            }
+
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+        Log.e(TAG, stringRequest.toString());
     }
 
 }
