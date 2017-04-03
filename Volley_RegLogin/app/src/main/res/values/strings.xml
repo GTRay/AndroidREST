@@ -1,4 +1,5 @@
 <resources>
+    <string name="title">PlayList</string>
     <string name="app_name">Volley_Reg/Login</string>
     <string name="loginfail_toast">Login failed!</string>
     <string name="registerfail_toast">Registration failed!</string>
