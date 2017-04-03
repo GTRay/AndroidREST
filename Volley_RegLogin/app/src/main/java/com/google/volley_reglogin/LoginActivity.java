@@ -63,10 +63,12 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(response.trim().equals("success")){
+                        // Handle access token.
+                        long token = Long.parseLong(response);
+                        if(token == 0) {
+                            Toast.makeText(LoginActivity.this, R.string.loginfail_toast, Toast.LENGTH_LONG).show();
+                        } else {
                             openProfile();
-                        }else{
-                            Toast.makeText(LoginActivity.this,response,Toast.LENGTH_LONG).show();
                         }
                     }
                 },
