@@ -22,6 +22,9 @@
                     android:label="@string/title">
 
         </activity>
+        <activity android:name=".ActivityUserProfile"
+                    android:label="PlayList">
+        </activity>
     </application>
 
 </manifest>

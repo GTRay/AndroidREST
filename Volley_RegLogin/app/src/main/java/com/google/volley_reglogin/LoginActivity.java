@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String LOGIN_URL = "http://104.196.62.142:8080/server_1/webapi/users/login";
+    public static final String LOGIN_URL = "http://104.196.62.142:8080/server_1/webapi/users/login?email=%1$s&password=%2$s";
 
     public static final String KEY_EMAIL="email";
     public static final String KEY_PASSWORD="password";
@@ -63,9 +63,9 @@ public class LoginActivity extends AppCompatActivity {
         email = editTextUsername.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
 
-        String mURL = LOGIN_URL + '?';
+        String mURL = String.format(LOGIN_URL, email, password);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, LOGIN_URL,
+        StringRequest userObjReq = new StringRequest(Request.Method.GET, mURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -85,28 +85,10 @@ public class LoginActivity extends AppCompatActivity {
                         Log.e(TAG, "Error message: " + error.toString());
                         Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_LONG ).show();
                     }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<String,String>();
-                map.put(KEY_EMAIL,email);
-                map.put(KEY_PASSWORD,password);
-                return map;
-            }
+                });
 
-            @Override
-            public String getBodyContentType() {
-                return "text/plain";
-            }
-        };
-
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-        Log.e(TAG, stringRequest.toString());
+        userObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Volley.newRequestQueue(this).add(userObjReq);
     }
 
     private void openProfile(){
