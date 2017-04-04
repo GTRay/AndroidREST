@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String REGISTER_URL = "http://104.196.62.142:8080/server_1/webapi/users";
 
-    public static final String KEY_NAME = "username";
-    public static final String KEY_PASSWORD = "password";
     public static final String KEY_EMAIL = "email";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_NAME = "username";
 
     private static final String TAG = "Main Acitivity";
     private EditText editTextUsername;
@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
         JSONObject userobj = new JSONObject();
         try {
-            userobj.put(KEY_NAME,name);
-            userobj.put(KEY_PASSWORD,password);
             userobj.put(KEY_EMAIL,email);
+            userobj.put(KEY_PASSWORD,password);
+            userobj.put(KEY_NAME,name);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -101,9 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                     }
-                }) {
-
-        };
+                });
 
         jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(this).add(jsonObjReq);
