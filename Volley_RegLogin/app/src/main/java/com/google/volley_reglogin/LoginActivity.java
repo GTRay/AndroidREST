@@ -93,6 +93,11 @@ public class LoginActivity extends AppCompatActivity {
                 map.put(KEY_PASSWORD,password);
                 return map;
             }
+
+            @Override
+            public String getBodyContentType() {
+                return "text/plain";
+            }
         };
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,

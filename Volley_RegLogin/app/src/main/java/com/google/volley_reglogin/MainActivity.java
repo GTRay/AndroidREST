@@ -14,8 +14,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -95,24 +98,10 @@ public class MainActivity extends AppCompatActivity {
                 params.put(KEY_EMAIL, email);
                 return params;
             }
-
-            @Override
-            public String getBodyContentType() {
-                return "application/raw";
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String,String>();
-                params.put("Content-Type", "application/raw");
-                return params;
-            }
-
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-        Log.e(TAG, stringRequest.toString());
     }
 
 }
