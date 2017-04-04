@@ -3,18 +3,23 @@ package com.google.volley_reglogin;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_EMAIL = "email";
 
+    private static final String TAG = "Main Acitivity";
     private EditText editTextUsername;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -65,11 +71,21 @@ public class MainActivity extends AppCompatActivity {
         final String password = editTextPassword.getText().toString().trim();
         final String email = editTextEmail.getText().toString().trim();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL,
+        JSONObject userobj = new JSONObject();
+        try {
+            userobj.put(KEY_EMAIL,email);
+            userobj.put(KEY_PASSWORD,password);
+            userobj.put(KEY_NAME,name);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        GenericRequest jsonObjReq = new GenericRequest(Request.Method.POST, REGISTER_URL, String.class, userobj,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // Handle access token.
+                        Log.e(TAG, "Register received: " + response);
                         long token = Long.parseLong(response);
                         if(token == 0) {
                             Toast.makeText(MainActivity.this, R.string.registerfail_toast, Toast.LENGTH_LONG).show();
@@ -83,19 +99,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                     }
-                }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put(KEY_NAME,name);
-                params.put(KEY_PASSWORD,password);
-                params.put(KEY_EMAIL, email);
-                return params;
-            }
-        };
+                });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Volley.newRequestQueue(this).add(jsonObjReq);
     }
 
 }
