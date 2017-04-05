@@ -103,7 +103,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                     }
-                });
+                }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
 
         jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         helper.add(jsonObjReq);
