@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class ActivityUserProfile extends AppCompatActivity {
 
     private TextView textView;
+    private static final String KEY_EMAIL="email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,9 @@ public class ActivityUserProfile extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        textView.setText("Welcome User " + intent.getStringExtra(LoginActivity.KEY_EMAIL));
+        // Get the calling activity
+        // getCallingActivity ()
+
+        textView.setText("Welcome User " + intent.getStringExtra(KEY_EMAIL));
     }
 }

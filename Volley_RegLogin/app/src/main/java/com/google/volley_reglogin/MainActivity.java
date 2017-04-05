@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         final String password = editTextPassword.getText().toString().trim();
         final String email = editTextEmail.getText().toString().trim();
 
+        /*
         JSONObject userobj = new JSONObject();
         try {
             userobj.put(KEY_EMAIL,email);
@@ -84,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d(TAG, userobj.toString());
+        */
+
+        Map<String, String> userobj = new HashMap<String, String>();
+        userobj.put(KEY_EMAIL,email);
+        userobj.put(KEY_PASSWORD,password);
+        userobj.put(KEY_NAME,name);
 
         GenericRequest jsonObjReq = new GenericRequest(Request.Method.POST, REGISTER_URL, String.class, userobj,
                 new Response.Listener<String>() {
@@ -91,8 +98,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         // Handle access token.
                         Log.d(TAG, "Register received: " + response);
-                        long token = Long.parseLong(response);
-                        if(token == 0) {
+                        //long token = Long.parseLong(response);
+                        String token = response;
+                        if(token == "0") {
                             Log.d(TAG, "Received 0!");
                             Toast.makeText(MainActivity.this, R.string.registerfail_toast, Toast.LENGTH_LONG).show();
                         } else {
