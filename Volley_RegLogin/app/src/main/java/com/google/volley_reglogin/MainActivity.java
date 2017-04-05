@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.d(TAG, userobj.toString());
 
         GenericRequest jsonObjReq = new GenericRequest(Request.Method.POST, REGISTER_URL, String.class, userobj,
                 new Response.Listener<String>() {
@@ -104,13 +105,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, error.toString());
-                        Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }) {
+
             @Override
             public String getBodyContentType() {
                 return "application/json";
             }
+
         };
 
         jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
