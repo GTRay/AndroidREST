@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_NAME = "username";
 
-    private static final String TAG = "Main Acitivity";
+    private static final String TAG = "Main_Activity";
     private EditText editTextUsername;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -92,8 +92,10 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "Register received: " + response);
                         long token = Long.parseLong(response);
                         if(token == 0) {
+                            Log.d(TAG, "Received 0!");
                             Toast.makeText(MainActivity.this, R.string.registerfail_toast, Toast.LENGTH_LONG).show();
                         } else {
+                            Log.d(TAG, "Register success!");
                             Toast.makeText(MainActivity.this, R.string.Welcome, Toast.LENGTH_LONG).show();
                         }
                     }
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, error.toString());
                         Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
                     }
                 }) {

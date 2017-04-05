@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final String KEY_EMAIL="email";
     public static final String KEY_PASSWORD="password";
 
-    private static final String TAG = "Login Acitivity";
+    private static final String TAG = "Login_Activity";
 
     private EditText editTextUsername;
     private EditText editTextPassword;
