@@ -41,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     private String email;
     private String password;
 
+    private ComQueue helper = ComQueue.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // Handle access token.
-                        Log.e(TAG, "Login received: " + response);
+                        Log.d(TAG, "Login received: " + response);
                         long token = Long.parseLong(response);
                         if(token == 0) {
                             Toast.makeText(LoginActivity.this, R.string.loginfail_toast, Toast.LENGTH_LONG).show();
@@ -82,13 +84,13 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Error message: " + error.toString());
+                        Log.d(TAG, "Error message: " + error.toString());
                         Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_LONG ).show();
                     }
                 });
 
         userObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Volley.newRequestQueue(this).add(userObjReq);
+        helper.add(userObjReq);
     }
 
     private void openProfile(){

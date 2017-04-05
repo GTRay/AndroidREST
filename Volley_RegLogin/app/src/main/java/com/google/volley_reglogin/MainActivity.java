@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonRegister;
     private Button buttonLogin;
 
+    private ComQueue helper = ComQueue.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // Handle access token.
-                        Log.e(TAG, "Register received: " + response);
+                        Log.d(TAG, "Register received: " + response);
                         long token = Long.parseLong(response);
                         if(token == 0) {
                             Toast.makeText(MainActivity.this, R.string.registerfail_toast, Toast.LENGTH_LONG).show();
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Volley.newRequestQueue(this).add(jsonObjReq);
+        helper.add(jsonObjReq);
     }
 
 }
