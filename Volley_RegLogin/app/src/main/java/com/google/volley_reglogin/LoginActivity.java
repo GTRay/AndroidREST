@@ -1,5 +1,6 @@
 package com.google.volley_reglogin;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String LOGIN_URL = "http://104.196.62.142:8080/server_1/webapi/users/login?email=%1$s&password=%2$s";
+    public static final String LOGIN_URL_OFFSET = "login?email=%1$s&password=%2$s";
 
     public static final String KEY_EMAIL="email";
     public static final String KEY_PASSWORD="password";
@@ -41,12 +42,18 @@ public class LoginActivity extends AppCompatActivity {
     private String email;
     private String password;
 
+    private String LOGIN_URL;
+
     private ComQueue helper = ComQueue.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Context context = this;
+
+        LOGIN_URL = context.getResources().getString(R.string.Ip_address) + LOGIN_URL_OFFSET;
 
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);

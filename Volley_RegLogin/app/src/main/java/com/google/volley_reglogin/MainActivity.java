@@ -1,5 +1,6 @@
 package com.google.volley_reglogin;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,8 +29,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String REGISTER_URL = "http://104.196.62.142:8080/server_1/webapi/users";
-
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_NAME = "username";
@@ -42,12 +41,22 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonRegister;
     private Button buttonLogin;
 
+    private String name;
+    private String password;
+    private String email;
+
+    private String REGISTER_URL;
+
     private ComQueue helper = ComQueue.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Context context = this;
+
+        REGISTER_URL = context.getResources().getString(R.string.Ip_address);
 
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -71,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void registerUser(){
-        final String name = editTextUsername.getText().toString().trim();
-        final String password = editTextPassword.getText().toString().trim();
-        final String email = editTextEmail.getText().toString().trim();
+        name = editTextUsername.getText().toString().trim();
+        password = editTextPassword.getText().toString().trim();
+        email = editTextEmail.getText().toString().trim();
 
         /*
         JSONObject userobj = new JSONObject();
@@ -104,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, "Received 0!");
                             Toast.makeText(MainActivity.this, R.string.registerfail_toast, Toast.LENGTH_LONG).show();
                         } else {
+                            // Login into the profile
+                            openProfile();
                             Log.d(TAG, "Register success!");
                             Toast.makeText(MainActivity.this, R.string.Welcome, Toast.LENGTH_LONG).show();
                         }
@@ -126,6 +137,12 @@ public class MainActivity extends AppCompatActivity {
 
         jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         helper.add(jsonObjReq);
+    }
+
+    private void openProfile(){
+        Intent intent = new Intent(this, ActivityUserProfile.class);
+        intent.putExtra(KEY_EMAIL, email);
+        startActivity(intent);
     }
 
 }
