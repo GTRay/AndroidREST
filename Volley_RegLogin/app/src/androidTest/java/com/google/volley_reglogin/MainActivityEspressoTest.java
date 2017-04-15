@@ -46,7 +46,7 @@ public class MainActivityEspressoTest {
 
         onView(withId(R.id.mainButtonRegister)).perform(click());
 
-        onView(withText(R.string.registerfail_toast)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        onView(withText(R.string.registerfail_toast)).inRoot(new ToastMatcher()).check(matches(withText("Registration failed!")));
     }
 
     @Test
@@ -61,6 +61,6 @@ public class MainActivityEspressoTest {
 
         onView(withId(R.id.mainButtonRegister)).perform(click());
 
-        onView(withText(R.string.Welcome)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        onView(withText(R.string.Welcome)).inRoot(new ToastMatcher()).check(matches(withText("Welcome!")));
     }
 }
