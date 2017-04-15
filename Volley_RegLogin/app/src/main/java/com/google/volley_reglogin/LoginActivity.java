@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "Login_Activity";
 
-    private EditText editTextUsername;
+    private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
 
@@ -55,10 +55,10 @@ public class LoginActivity extends AppCompatActivity {
 
         LOGIN_URL = context.getResources().getString(R.string.Ip_address) + LOGIN_URL_OFFSET;
 
-        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextEmail = (EditText) findViewById(R.id.loginTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.loginTextPassword);
 
-        buttonLogin = (Button) findViewById(R.id.buttonLogin);
+        buttonLogin = (Button) findViewById(R.id.loginButtonLogin);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void userLogin() {
-        email = editTextUsername.getText().toString().trim();
+        email = editTextEmail.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
 
         String mURL = String.format(LOGIN_URL, email, password);

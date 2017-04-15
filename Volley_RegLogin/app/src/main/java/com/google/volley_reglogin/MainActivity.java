@@ -58,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
         REGISTER_URL = context.getResources().getString(R.string.Ip_address);
 
-        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        editTextEmail= (EditText) findViewById(R.id.editTextEmail);
+        editTextUsername = (EditText) findViewById(R.id.mainTextUsername);
+        editTextPassword = (EditText) findViewById(R.id.mainTextPassword);
+        editTextEmail= (EditText) findViewById(R.id.mainTextEmail);
 
-        buttonRegister = (Button) findViewById(R.id.buttonRegister);
-        buttonLogin = (Button) findViewById(R.id.buttonLogin);
+        buttonRegister = (Button) findViewById(R.id.mainButtonRegister);
+        buttonLogin = (Button) findViewById(R.id.mainButtonLogin);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,9 +107,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         // Handle access token.
                         Log.d(TAG, "Register received: " + response);
-                        //long token = Long.parseLong(response);
-                        String token = response;
-                        if(token == "0") {
+                        long token = Long.parseLong(response);
+                        // String token = response;
+                        if(token == 0) {
                             Log.d(TAG, "Received 0!");
                             Toast.makeText(MainActivity.this, R.string.registerfail_toast, Toast.LENGTH_LONG).show();
                         } else {
