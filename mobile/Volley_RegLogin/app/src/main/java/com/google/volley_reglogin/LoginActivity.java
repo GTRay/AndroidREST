@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -76,6 +77,14 @@ public class LoginActivity extends AppCompatActivity {
     private void userLogin() {
         email = editTextEmail.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
+        if (TextUtils.isEmpty(password)) {
+            messageToShow.setText("Please enter password!");
+            return;
+        }
+        if (TextUtils.isEmpty(email)) {
+            messageToShow.setText("Please enter email address!");
+            return;
+        }
 
         String mURL = String.format(LOGIN_URL, email, password);
 

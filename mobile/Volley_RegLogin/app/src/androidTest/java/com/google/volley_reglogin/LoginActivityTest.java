@@ -76,7 +76,30 @@ public class LoginActivityTest {
 
         onView(withId(R.id.LoginMessage)).check(matches(withText("Login failed. User not exist!")));
     }
+    @Test
+    public void emptyEmailLogin() {
+        String email = "";
+        String password = "1234";
 
+        onView(withId(R.id.loginTextPassword)).perform(typeText(password), closeSoftKeyboard());
+        onView(withId(R.id.loginTextEmail)).perform(typeText(email), closeSoftKeyboard());
+
+        onView(withId(R.id.loginButtonLogin)).perform(click());
+
+        onView(withId(R.id.LoginMessage)).check(matches(withText("Please enter email address!")));
+    }
+    @Test
+    public void emptyPasswordLogin() {
+        String email = "sam11@gmail.com";
+        String password = "";
+
+        onView(withId(R.id.loginTextPassword)).perform(typeText(password), closeSoftKeyboard());
+        onView(withId(R.id.loginTextEmail)).perform(typeText(email), closeSoftKeyboard());
+
+        onView(withId(R.id.loginButtonLogin)).perform(click());
+
+        onView(withId(R.id.LoginMessage)).check(matches(withText("Please enter password!")));
+    }
     @After
     public void unregisterIdlingResource() {
         if(mVolleyResource != null) {
