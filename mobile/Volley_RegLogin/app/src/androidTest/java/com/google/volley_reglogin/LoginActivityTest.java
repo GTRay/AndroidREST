@@ -63,7 +63,7 @@ public class LoginActivityTest {
         String successString = "Welcome User dlee@gmail.com";
         onView(withId(R.id.textViewUsername)).check(matches(allOf(withText(successString), isDisplayed())));
     }
-    
+
     @Test
     public void newUserLogin() {
         String email = "sam11@gmail.com";
@@ -100,6 +100,7 @@ public class LoginActivityTest {
 
         onView(withId(R.id.LoginMessage)).check(matches(withText("Please enter password!")));
     }
+
     @After
     public void unregisterIdlingResource() {
         if(mVolleyResource != null) {
