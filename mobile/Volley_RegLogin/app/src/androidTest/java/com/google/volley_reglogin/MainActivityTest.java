@@ -48,9 +48,9 @@ public class MainActivityTest {
     @Test
     public void newUserRegister() throws Exception {
 
-        String name = "sam9";
+        String name = "sam11";
         String password = "1234";
-        String email = "sam9@gmail.com";
+        String email = "sam11@gmail.com";
 
         onView(withId(R.id.mainTextUsername)).perform(typeText(name), closeSoftKeyboard());
         onView(withId(R.id.mainTextPassword)).perform(typeText(password), closeSoftKeyboard());
