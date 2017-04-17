@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,7 +29,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String LOGIN_URL_OFFSET = "login?email=%1$s&password=%2$s";
+    public static final String LOGIN_URL_OFFSET = "/login?email=%1$s&password=%2$s";
 
     public static final String KEY_EMAIL="email";
     public static final String KEY_PASSWORD="password";
@@ -38,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonLogin;
+
+    private TextView messageToShow;
 
     private String email;
     private String password;
@@ -57,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextEmail = (EditText) findViewById(R.id.loginTextEmail);
         editTextPassword = (EditText) findViewById(R.id.loginTextPassword);
+
+        messageToShow = (TextView) findViewById(R.id.LoginMessage);
 
         buttonLogin = (Button) findViewById(R.id.loginButtonLogin);
 
@@ -82,7 +87,8 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "Login received: " + response);
                         long token = Long.parseLong(response);
                         if(token == 0) {
-                            Toast.makeText(LoginActivity.this, R.string.loginfail_toast, Toast.LENGTH_LONG).show();
+                            // Toast.makeText(LoginActivity.this, R.string.loginfail_toast, Toast.LENGTH_LONG).show();
+                            messageToShow.setText("Login failed. User not exist!");
                         } else {
                             openProfile();
                         }

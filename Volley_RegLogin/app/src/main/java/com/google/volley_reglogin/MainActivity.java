@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
 
+    private TextView messageToShow;
+
     private Button buttonRegister;
     private Button buttonLogin;
 
@@ -62,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         editTextPassword = (EditText) findViewById(R.id.mainTextPassword);
         editTextEmail= (EditText) findViewById(R.id.mainTextEmail);
 
+        messageToShow = (TextView) findViewById(R.id.RegMessage);
+
         buttonRegister = (Button) findViewById(R.id.mainButtonRegister);
         buttonLogin = (Button) findViewById(R.id.mainButtonLogin);
 
@@ -80,21 +85,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void registerUser(){
+
         name = editTextUsername.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
         email = editTextEmail.getText().toString().trim();
-
-        /*
-        JSONObject userobj = new JSONObject();
-        try {
-            userobj.put(KEY_EMAIL,email);
-            userobj.put(KEY_PASSWORD,password);
-            userobj.put(KEY_NAME,name);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.d(TAG, userobj.toString());
-        */
 
         Map<String, String> userobj = new HashMap<String, String>();
         userobj.put(KEY_EMAIL,email);
@@ -111,12 +105,14 @@ public class MainActivity extends AppCompatActivity {
                         // String token = response;
                         if(token == 0) {
                             Log.d(TAG, "Received 0!");
-                            Toast.makeText(MainActivity.this, R.string.registerfail_toast, Toast.LENGTH_LONG).show();
+                            // Toast.makeText(MainActivity.this, R.string.registerfail_toast, Toast.LENGTH_LONG).show();
+                            messageToShow.setText("Registration failed!");
                         } else {
                             // Login into the profile
-                            openProfile();
+                            // openProfile();
                             Log.d(TAG, "Register success!");
-                            Toast.makeText(MainActivity.this, R.string.Welcome, Toast.LENGTH_LONG).show();
+                            // Toast.makeText(MainActivity.this, R.string.Welcome, Toast.LENGTH_LONG).show();
+                            messageToShow.setText("Registration succeed. Please login!");
                         }
                     }
                 },
@@ -139,10 +135,11 @@ public class MainActivity extends AppCompatActivity {
         helper.add(jsonObjReq);
     }
 
+    /*
     private void openProfile(){
         Intent intent = new Intent(this, ActivityUserProfile.class);
         intent.putExtra(KEY_EMAIL, email);
         startActivity(intent);
     }
-
+    */
 }

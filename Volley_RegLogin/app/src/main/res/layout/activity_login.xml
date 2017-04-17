@@ -33,4 +33,10 @@
         android:text="Login"
         android:id="@+id/loginButtonLogin" />
 
+    <TextView
+        android:id="@+id/LoginMessage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
 </LinearLayout>

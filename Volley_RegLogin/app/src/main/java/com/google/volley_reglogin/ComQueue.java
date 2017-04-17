@@ -12,7 +12,7 @@ import com.android.volley.toolbox.Volley;
  */
 
 public class ComQueue extends Application {
-    private RequestQueue mRequestQueue;
+    private static RequestQueue mRequestQueue;
     private static ComQueue mInstance;
 
     public static final String TAG = ComQueue.class.getName();
@@ -28,8 +28,13 @@ public class ComQueue extends Application {
         return mInstance;
     }
 
-    public RequestQueue getRequestQueue() {
-        return mRequestQueue;
+    public static synchronized RequestQueue getRequestQueue() {
+        if (mRequestQueue != null) {
+            return mRequestQueue;
+        } else {
+            throw new IllegalStateException("Not initialized");
+        }
+
     }
 
     public <T> void add(Request<T> req) {

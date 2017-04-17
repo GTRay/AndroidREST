@@ -1,5 +1,6 @@
 package com.google.volley_reglogin;
 
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -16,6 +17,7 @@ import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
@@ -40,6 +42,9 @@ public class LoginActivityEspressoTest {
         onView(withId(R.id.loginButtonLogin)).perform(click());
 
         onView(withText(R.string.Welcome)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+
+        String successString = "Welcome User dlee@gmail.com";
+        onView(withId(R.id.textViewUsername)).check(matches(allOf(withText(successString), isDisplayed())));
     }
 
     @Test

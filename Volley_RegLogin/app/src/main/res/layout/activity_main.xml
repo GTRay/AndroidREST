@@ -50,5 +50,11 @@
         android:text="Login"
         android:id="@+id/mainButtonLogin" />
 
+    <TextView
+        android:id="@+id/RegMessage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
 
 </LinearLayout>
