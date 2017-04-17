@@ -1,9 +1,13 @@
 package com.google.volley_reglogin;
 
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,11 +30,26 @@ import static org.hamcrest.Matchers.not;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class LoginActivityEspressoTest {
+@LargeTest
+public class LoginActivityTest {
+
+    private VolleyIdlingResource mVolleyResource;
 
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(LoginActivity.class);
 
+    @Before
+    public void registerIdlingResource() {
+        try {
+            mVolleyResource = new VolleyIdlingResource("VolleyCalls");
+            Espresso.registerIdlingResources(mVolleyResource);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+    
     @Test
     public void existingUserLogin() {
         String email = "dlee@gmail.com";
@@ -41,12 +60,10 @@ public class LoginActivityEspressoTest {
 
         onView(withId(R.id.loginButtonLogin)).perform(click());
 
-        onView(withText(R.string.Welcome)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-
         String successString = "Welcome User dlee@gmail.com";
         onView(withId(R.id.textViewUsername)).check(matches(allOf(withText(successString), isDisplayed())));
     }
-
+    
     @Test
     public void newUserLogin() {
         String email = "sam11@gmail.com";
@@ -57,6 +74,13 @@ public class LoginActivityEspressoTest {
 
         onView(withId(R.id.loginButtonLogin)).perform(click());
 
-        onView(withText(R.string.loginfail_toast)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        onView(withId(R.id.LoginMessage)).check(matches(withText("Login failed. User not exist!")));
+    }
+
+    @After
+    public void unregisterIdlingResource() {
+        if(mVolleyResource != null) {
+            Espresso.unregisterIdlingResources(mVolleyResource);
+        }
     }
 }

@@ -26,16 +26,16 @@ public class VolleyIdlingResource implements IdlingResource {
     // written from main thread, read from any thread.
     private volatile ResourceCallback resourceCallback;
 
-    private Field requests;
-    private RequestQueue requestQueue;
+    private Field mCurrentRequests;
+    private RequestQueue mVolleyRequestQueue;
 
     public VolleyIdlingResource(String resourceName) throws SecurityException, NoSuchFieldException {
         this.resourceName = Preconditions.checkNotNull(resourceName);
 
-        requestQueue = ComQueue.getInstance().getRequestQueue();
+        mVolleyRequestQueue = ComQueue.getInstance().getRequestQueue();
 
-        requests = RequestQueue.class.getDeclaredField("requests");
-        requests.setAccessible(true);
+        mCurrentRequests = RequestQueue.class.getDeclaredField("mCurrentRequests");
+        mCurrentRequests.setAccessible(true);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class VolleyIdlingResource implements IdlingResource {
     @Override
     public boolean isIdleNow() {
         try {
-            Set<Request> set = (Set<Request>) requests.get(requestQueue);
+            Set<Request> set = (Set<Request>) mCurrentRequests.get(mVolleyRequestQueue);
             if (set != null) {
                 int count = set.size();
                 if (count == 0) {

@@ -26,7 +26,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MainActivitySecondTest {
+public class MainActivityTest {
 
     private VolleyIdlingResource mVolleyResource;
 
@@ -48,9 +48,9 @@ public class MainActivitySecondTest {
     @Test
     public void newUserRegister() throws Exception {
 
-        String name = "sam8";
+        String name = "sam9";
         String password = "1234";
-        String email = "sam8@gmail.com";
+        String email = "sam9@gmail.com";
 
         onView(withId(R.id.mainTextUsername)).perform(typeText(name), closeSoftKeyboard());
         onView(withId(R.id.mainTextPassword)).perform(typeText(password), closeSoftKeyboard());
@@ -75,7 +75,7 @@ public class MainActivitySecondTest {
 
         onView(withId(R.id.RegMessage)).check(matches(withText("Registration failed!")));
     }
-    
+
     @After
     public void unregisterIdlingResource() {
         if(mVolleyResource != null) {
