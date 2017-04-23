@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     private void userLogin() {
         email = editTextEmail.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
+
         if (TextUtils.isEmpty(password)) {
             messageToShow.setText("Please enter password!");
             return;

@@ -5,6 +5,7 @@ import android.support.test.espresso.Espresso;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.WindowManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,6 +40,19 @@ public class LoginActivityTest {
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Before
+    public void setUp() {
+        final LoginActivity activity = mActivityRule.getActivity();
+        Runnable wakeUpDevice = new Runnable() {
+            public void run() {
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        };
+        activity.runOnUiThread(wakeUpDevice);
+    }
+
+    @Before
     public void registerIdlingResource() {
         try {
             mVolleyResource = new VolleyIdlingResource("VolleyCalls");
@@ -63,7 +77,7 @@ public class LoginActivityTest {
         String successString = "Welcome User dlee@gmail.com";
         onView(withId(R.id.textViewUsername)).check(matches(allOf(withText(successString), isDisplayed())));
     }
-
+    
     @Test
     public void newUserLogin() {
         String email = "sam11@gmail.com";
@@ -76,6 +90,7 @@ public class LoginActivityTest {
 
         onView(withId(R.id.LoginMessage)).check(matches(withText("Login failed. User not exist!")));
     }
+
     @Test
     public void emptyEmailLogin() {
         String email = "";
@@ -88,6 +103,7 @@ public class LoginActivityTest {
 
         onView(withId(R.id.LoginMessage)).check(matches(withText("Please enter email address!")));
     }
+
     @Test
     public void emptyPasswordLogin() {
         String email = "sam11@gmail.com";
